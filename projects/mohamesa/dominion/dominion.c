@@ -701,19 +701,19 @@ int x;
                         printf("Coins: %d < %d\n", state->coins, getCost(choice1));
 	          }
 	                                                                                                                                                             }
-                                                                                                                                                                     else{
-	                                                                                                                                                                      if (DEBUG){
-                                                                                                                                                                                    printf("Deck Count: %d\n", state->handCount[currentPlayer] + state->deckCount[currentPlayer] + state->discardCount[currentPlayer]);
-                                                                                                                                                                             }
-                                                                                                                                                                             gainCard(choice1, state, 0, currentPlayer);//Gain the card
-                                                                                                                                                                             x = 0;//No more buying cards
-                                                                                                                                                                            if (DEBUG){
-                                                                                                                                                                                    printf("Deck Count: %d\n", state->handCount[currentPlayer] + state->deckCount[currentPlayer] + state->discardCount[currentPlayer]);
-                                                                                                                                                                           }
-                                                                                                                                                                      }
+       else{
+                  if (DEBUG){
+                       printf("Deck Count: %d\n", state->handCount[currentPlayer] + state->deckCount[currentPlayer] + state->discardCount[currentPlayer]);
+                   }
+                 gainCard(choice1, state, 0, currentPlayer);//Gain the card
+                 x = 0;//No more buying cards
+                 if (DEBUG){
+                      printf("Deck Count: %d\n", state->handCount[currentPlayer] + state->deckCount[currentPlayer] + state->discardCount[currentPlayer]);
+             }
+        }
    }
-                                                                                                                                                               //Reset Hand
-                                                                                                                                                              for (i = 0; i <= state->handCount[currentPlayer]; i++){
+//Reset Hand
+     for (i = 0; i <= state->handCount[currentPlayer]; i++){
      state->hand[currentPlayer][i] = temphand[i];
      temphand[i] = -1;
      }
