@@ -753,7 +753,7 @@ void minion_card(struct gameState *state, int handPos, int currentPlayer, int ch
 	
 	if (choice1)		// changed +2 coins to +3 coins
 	{
-			state->coins = state->coins + 2;
+			state->coins = state->coins + 3;
 	}
 
 	else if (choice2)		//discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
