@@ -78,7 +78,7 @@ int main() {
 	assertTrue(G.coins, pre_bonus + 3 + with_bouns);
 	
 	initializeGame(numPlayers, k, seed, &G);
-	printf("\n Adding +2 s and + 4 bonus in the treasuer card \n");
+	printf("\n Adding +2 silver and + 4 bonus in the treasuer card \n");
 	int preBonus = G.coins;
 	int withBouns = 3;
 	gainCard(silver, &G, 2, thisPlayer);
