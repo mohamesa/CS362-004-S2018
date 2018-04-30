@@ -91,7 +91,7 @@ unittestresults.out: unittest1.c unittest2.c unittest3.c unittest4.c cardtest1.c
 	echo "unittest4.c:" >> unittestresults.out
 	./unittest4 >> unittestresults.out
 	gcov unittest4.c >> unittestresults.out
-	gcov -b unittest1.c >> unittestresults.out
+	gcov -b unittest4.c >> unittestresults.out
 	cat unittest4.c.gcov >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
 	cat dominion.c.gcov >> unittestresults.out
