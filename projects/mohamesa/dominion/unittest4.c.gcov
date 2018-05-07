@@ -1,0 +1,148 @@
+        -:    0:Source:unittest4.c
+        -:    0:Graph:unittest4.gcno
+        -:    0:Data:unittest4.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include "dominion.h"
+        -:    2:#include "dominion_helpers.h"
+        -:    3:#include <string.h>
+        -:    4:#include <assert.h>
+        -:    5:#include <stdio.h>
+        -:    6:#include "rngs.h"
+        -:    7:#include <stdlib.h>
+        -:    8:
+        -:    9:int failed = 0;   
+        -:   10:
+function assertTrue called 6 returned 100% blocks executed 60%
+        6:   11:void assertTrue(int a, int b) {
+        -:   12:
+        6:   13:	if (a == b) {
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+        6:   14:		printf("->Test Passed\n");
+call    0 returned 100%
+        -:   15:	}
+        -:   16:	else {
+    #####:   17:		printf("->Test did not Pass\n");
+call    0 never executed
+    #####:   18:	failed ++;
+        -:   19:	}
+        6:   20:}
+        -:   21:
+function main called 1 returned 100% blocks executed 98%
+        1:   22:int main() {
+        1:   23:	int seed = 100;
+        -:   24:	struct gameState  G;
+        1:   25:	int numPlayers = 2;
+        1:   26:	int thisPlayer = 0;
+        1:   27:	int k[10] = { adventurer, gardens, embargo, village, minion, mine, cutpurse,
+        -:   28:		sea_hag, tribute, smithy };
+        -:   29:
+        -:   30:	// initialize  the game state
+        1:   31:	initializeGame(numPlayers, k, seed, &G);
+call    0 returned 100%
+        -:   32:	
+        1:   33:	printf("----Testing updateCoins----\n");
+call    0 returned 100%
+        -:   34:
+        1:   35:	printf("\n Adding +1 copper in the treasuer card \n");
+call    0 returned 100%
+        1:   36:	int copperrOne = G.coins;
+        1:   37:	gainCard(copper, &G, 2, thisPlayer);
+call    0 returned 100%
+        1:   38:	updateCoins(thisPlayer, &G, 0);
+call    0 returned 100%
+        -:   39:
+        1:   40:	printf("\n hand count = %d, expected = %d\n", G.coins, copperrOne + 1);
+call    0 returned 100%
+        1:   41:	assertTrue(G.coins, copperrOne + 1);
+call    0 returned 100%
+        -:   42:	
+        1:   43:	printf("\n Adding +2 sliver in the treasuer card \n");
+call    0 returned 100%
+        1:   44:	int sliverTwo = G.coins;
+        1:   45:	gainCard(silver, &G, 2, thisPlayer);
+call    0 returned 100%
+        1:   46:	updateCoins(thisPlayer, &G, 0);
+call    0 returned 100%
+        -:   47:
+        1:   48:	printf("hand count = %d, expected = %d\n", G.coins, sliverTwo + 2);
+call    0 returned 100%
+        1:   49:	assertTrue(G.coins, sliverTwo + 2);
+call    0 returned 100%
+        -:   50:
+        -:   51:
+        1:   52:	printf("\n Adding +3 gold in the treasuer card \n");
+call    0 returned 100%
+        1:   53:	int goldThree = G.coins;
+        1:   54:	gainCard(gold, &G, 2, thisPlayer);
+call    0 returned 100%
+        1:   55:	updateCoins(thisPlayer, &G, 0);
+call    0 returned 100%
+        -:   56:
+        1:   57:	printf("hand count = %d, expected = %d\n", G.coins , goldThree + 3);
+call    0 returned 100%
+        1:   58:	assertTrue(G.coins , goldThree + 3);
+call    0 returned 100%
+        -:   59:	
+        1:   60:	printf("\n Adding +1 copper and + 4 bonus in the treasuer card \n");
+call    0 returned 100%
+        1:   61:	int beforeBonus = G.coins;
+        1:   62:	int bonus = 4;
+        1:   63:	gainCard(copper, &G, 2, thisPlayer);
+call    0 returned 100%
+        1:   64:	updateCoins(thisPlayer, &G, bonus);
+call    0 returned 100%
+        -:   65:
+        1:   66:	printf("hand count = %d, expected = %d\n", G.coins, beforeBonus + 1 + bonus);
+call    0 returned 100%
+        1:   67:	assertTrue(G.coins, beforeBonus + 1 +bonus);
+call    0 returned 100%
+        -:   68:
+        1:   69:	initializeGame(numPlayers, k, seed, &G);
+call    0 returned 100%
+        -:   70:
+        1:   71:	printf("\n Adding +3 gold and + 4 bonus in the treasuer card \n");
+call    0 returned 100%
+        1:   72:	int pre_bonus = G.coins;
+        1:   73:	int with_bouns = 4;
+        1:   74:	gainCard(gold, &G, 2, thisPlayer);
+call    0 returned 100%
+        1:   75:	updateCoins(thisPlayer, &G, with_bouns);
+call    0 returned 100%
+        -:   76:
+        1:   77:	printf("hand count = %d, expected = %d\n", G.coins, pre_bonus + 3 + with_bouns);
+call    0 returned 100%
+        1:   78:	assertTrue(G.coins, pre_bonus + 3 + with_bouns);
+call    0 returned 100%
+        -:   79:	
+        1:   80:	initializeGame(numPlayers, k, seed, &G);
+call    0 returned 100%
+        1:   81:	printf("\n Adding +2 s and + 4 bonus in the treasuer card \n");
+call    0 returned 100%
+        1:   82:	int preBonus = G.coins;
+        1:   83:	int withBouns = 3;
+        1:   84:	gainCard(silver, &G, 2, thisPlayer);
+call    0 returned 100%
+        1:   85:	updateCoins(thisPlayer, &G, withBouns);
+call    0 returned 100%
+        -:   86:
+        1:   87:	printf("hand count = %d, expected = %d\n", G.coins, preBonus + 2 + withBouns);
+call    0 returned 100%
+        1:   88:	assertTrue(G.coins, preBonus + 2 + withBouns);
+call    0 returned 100%
+        -:   89:
+        1:   90:	if (!failed) {
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+        1:   91:		printf("\n Test Successfully Completed\n"); 
+call    0 returned 100%
+        -:   92:	}
+        -:   93:	else {
+    #####:   94:		printf("\n Test Failed\n");
+call    0 never executed
+        -:   95:	}
+        1:   96:	printf("\n");
+call    0 returned 100%
+        1:   97:	return 0;
+        -:   98:}

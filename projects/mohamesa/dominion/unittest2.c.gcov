@@ -1,0 +1,205 @@
+        -:    0:Source:unittest2.c
+        -:    0:Graph:unittest2.gcno
+        -:    0:Data:unittest2.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include "dominion.h"
+        -:    2:#include "dominion_helpers.h"
+        -:    3:#include <string.h>
+        -:    4:#include <assert.h>
+        -:    5:#include <stdio.h>
+        -:    6:#include "rngs.h"
+        -:    7:#include <stdlib.h>
+        -:    8:
+        -:    9:int failed = 0;
+        -:   10:
+function assertTrue called 13 returned 100% blocks executed 60%
+       13:   11:void assertTrue(int a, int b) {
+        -:   12:
+       13:   13:	if (a == b) {
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+       13:   14:		printf("->Test Passed\n");
+call    0 returned 100%
+        -:   15:	}
+        -:   16:	else {
+    #####:   17:		printf("->Test did not Pass\n");
+call    0 never executed
+    #####:   18:		failed++;
+        -:   19:	}
+       13:   20:}
+        -:   21:
+function main called 1 returned 100% blocks executed 98%
+        1:   22:int main() {
+        1:   23:	int seed = 100;
+        -:   24:	struct gameState G, testG; 
+        1:   25:	int numPlayers = 2;
+        1:   26:	int thisPlayer = 0;
+        1:   27:	int toflag0 = 0;
+        1:   28:	int toflag1 = 1;
+        1:   29:	int toflag2 = 2;
+        -:   30:
+        1:   31:	int k[10] = { adventurer, gardens, embargo, village, minion, mine, cutpurse,
+        -:   32:		sea_hag, tribute, smithy };
+        -:   33:
+        -:   34:	// initialize  the game state
+        1:   35:	initializeGame(numPlayers, k, seed, &G);
+call    0 returned 100%
+        -:   36:
+        1:   37:	printf("----Testing gainCard----");
+call    0 returned 100%
+        -:   38:
+        -:   39:	// copy the game state 
+        1:   40:	memcpy(&testG, &G, sizeof(struct gameState));
+        -:   41:
+        1:   42:	printf("\n Testing gainCard for gold\n");
+call    0 returned 100%
+        -:   43:
+        1:   44:	printf("\n Gold supply is empty\n"); 
+call    0 returned 100%
+        1:   45:	G.supplyCount[gold] = 0;
+        1:   46:	assertTrue(gainCard(gold, &G, toflag0, thisPlayer), - 1);
+call    0 returned 100%
+call    1 returned 100%
+        1:   47:	G.supplyCount[gold] = 30;
+        -:   48:
+        1:   49:	printf("\n Card added to deck count\n");
+call    0 returned 100%
+        1:   50:	int deckCount = G.deckCount[0];
+        1:   51:	gainCard(gold, &G, toflag1, thisPlayer);
+call    0 returned 100%
+        1:   52:	printf("Deck count = %d, expected = %d\n",  G.deckCount[0] ,deckCount + 1);
+call    0 returned 100%
+        1:   53:	assertTrue( G.deckCount[0] , deckCount + 1);
+call    0 returned 100%
+        -:   54:	
+        1:   55:	printf("\n Card added to hand count\n");
+call    0 returned 100%
+        1:   56:	int handCount = G.handCount[0];
+        1:   57:	gainCard(gold, &G, toflag2, thisPlayer);
+call    0 returned 100%
+        1:   58:	printf("hand count = %d, expected = %d\n",  G.handCount[0] ,handCount+ 1);
+call    0 returned 100%
+        1:   59:	assertTrue( G.handCount[0] , handCount + 1);
+call    0 returned 100%
+        -:   60:
+        1:   61:	printf("\n Card added to discard count \n");
+call    0 returned 100%
+        1:   62:	int discardCount = G.discardCount[0];
+        1:   63:	gainCard(gold, &G, toflag0, thisPlayer);
+call    0 returned 100%
+        1:   64:	printf("hand count = %d, expected = %d\n", G.discardCount[0] , discardCount + 1);
+call    0 returned 100%
+        1:   65:	assertTrue( G.discardCount[0] , discardCount + 1);
+call    0 returned 100%
+        -:   66:	
+        1:   67:	printf("\n Testing gainCard for silver\n");
+call    0 returned 100%
+        -:   68:
+        1:   69:	printf("\n Sliver supply is empty\n");
+call    0 returned 100%
+        1:   70:	G.supplyCount[silver] = 0;
+        1:   71:	assertTrue(gainCard(silver, &G, toflag0, thisPlayer), -1);
+call    0 returned 100%
+call    1 returned 100%
+        1:   72:	G.supplyCount[silver] = 40;
+        -:   73:
+        1:   74:	printf("\n Card added to deck count\n");
+call    0 returned 100%
+        1:   75:	int deckCount1 = G.deckCount[0];
+        1:   76:	gainCard(silver, &G, toflag1, thisPlayer);
+call    0 returned 100%
+        1:   77:	printf("Deck count = %d, expected = %d\n", G.deckCount[0], deckCount1 + 1);
+call    0 returned 100%
+        1:   78:	assertTrue(G.deckCount[0], deckCount1+ 1);
+call    0 returned 100%
+        -:   79:
+        1:   80:	printf("\n Card added to hand count\n");
+call    0 returned 100%
+        1:   81:	int handCount1 = G.handCount[0];
+        1:   82:	gainCard(silver, &G, toflag2, thisPlayer);
+call    0 returned 100%
+        1:   83:	printf("hand count = %d, expected = %d\n",  G.handCount[0] , handCount1 + 1);
+call    0 returned 100%
+        1:   84:	assertTrue( G.handCount[0] , handCount1 + 1);
+call    0 returned 100%
+        -:   85:
+        1:   86:	printf("\n Card added to discard count \n");
+call    0 returned 100%
+        1:   87:	int discardCount1 = G.discardCount[0];
+        1:   88:	gainCard(silver, &G, toflag0, thisPlayer);
+call    0 returned 100%
+        1:   89:	printf("hand count = %d, expected = %d\n", G.discardCount[0], discardCount1 + 1);
+call    0 returned 100%
+        1:   90:	assertTrue(G.discardCount[0], discardCount1 + 1);
+call    0 returned 100%
+        -:   91:
+        1:   92:	printf("\n Decrease supplycount of Silver \n");
+call    0 returned 100%
+        1:   93:	int silverSupplycount = G.supplyCount[silver];
+        1:   94:	gainCard(silver, &G, toflag0, thisPlayer);
+call    0 returned 100%
+        1:   95:	printf("hand count = %d, expected = %d\n", G.supplyCount[silver], silverSupplycount - 1);
+call    0 returned 100%
+        1:   96:	assertTrue(G.supplyCount[silver], silverSupplycount - 1 );
+call    0 returned 100%
+        -:   97:
+        1:   98:	printf("\n Testing gainCard for copper\n");
+call    0 returned 100%
+        -:   99:
+        1:  100:	printf("\n Copper supply is empty\n"); 
+call    0 returned 100%
+        1:  101:	G.supplyCount[copper] = 0;
+        1:  102:	assertTrue(gainCard(copper, &G, toflag0, thisPlayer), - 1);
+call    0 returned 100%
+call    1 returned 100%
+        1:  103:	G.supplyCount[copper] = 46;
+        -:  104:
+        1:  105:	printf("\n Card added to deck count\n");
+call    0 returned 100%
+        1:  106:	int deckCount2= G.deckCount[0];
+        1:  107:	gainCard(copper, &G, toflag1, thisPlayer);
+call    0 returned 100%
+        1:  108:	printf("Deck count = %d, expected = %d\n",  G.deckCount[0] ,deckCount2+ 1);
+call    0 returned 100%
+        1:  109:	assertTrue( G.deckCount[0] , deckCount2 + 1);
+call    0 returned 100%
+        -:  110:	
+        1:  111:	printf("\n Card added to hand count\n");
+call    0 returned 100%
+        1:  112:	int handCount2= G.handCount[0];
+        1:  113:	gainCard(copper, &G, toflag2, thisPlayer);
+call    0 returned 100%
+        1:  114:	printf("hand count = %d, expected = %d\n",  G.handCount[0] , handCount2 + 1);
+call    0 returned 100%
+        1:  115:	assertTrue( G.handCount[0] , handCount2 + 1);
+call    0 returned 100%
+        -:  116:
+        1:  117:	printf("\n Card added to discard count \n");
+call    0 returned 100%
+        1:  118:	int discardCount2 = G.discardCount[0];
+        1:  119:	gainCard(copper, &G, toflag0, thisPlayer);
+call    0 returned 100%
+        1:  120:	printf("hand count = %d, expected = %d\n", G.discardCount[0], discardCount2 + 1);
+call    0 returned 100%
+        1:  121:	assertTrue(G.discardCount[0], discardCount2 + 1);
+call    0 returned 100%
+        -:  122:
+        1:  123:	if (!failed) {
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+        1:  124:		printf("\n Test Successfully Completed\n");
+call    0 returned 100%
+        -:  125:	}
+        -:  126:	else {
+    #####:  127:		printf("\n Test Failed\n");
+call    0 never executed
+        -:  128:	}
+        1:  129:	printf("\n");
+call    0 returned 100%
+        1:  130:	return 0;
+        -:  131:}
+        -:  132:
+        -:  133:
+        -:  134:
+        -:  135:
