@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>URLValidatorCorrect</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>UrlValidatorTest.java</name>
+			<type>1</type>
+			<location>C:/Users/TofikAbdi/eclipse-workspace2/FinalProject/URLValidatorCorrect/test/UrlValidatorTest.java</location>
+		</link>
+		<link>
+			<name>bin/UrlValidatorTest.java</name>
+			<type>1</type>
+			<location>C:/Users/TofikAbdi/eclipse-workspaceextra/FinalProject/URLValidatorCorrect/src/UrlValidatorTest.java</location>
+		</link>
+		<link>
+			<name>src/UrlValidatorTest.java</name>
+			<type>1</type>
+			<location>C:/Users/TofikAbdi/eclipse-workspaceextra/FinalProject/URLValidatorCorrect/src/UrlValidatorTest.java</location>
+		</link>
+		<link>
+			<name>test/UrlValidatorRandomTester.java</name>
+			<type>1</type>
+			<location>C:/Users/TofikAbdi/eclipse-workspaceextra/FinalProject/URLValidatorCorrect/test/UrlValidatorRandomTester.java</location>
+		</link>
+	</linkedResources>
+</projectDescription>
