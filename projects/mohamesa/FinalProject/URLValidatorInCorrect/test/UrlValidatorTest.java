@@ -7,9 +7,6 @@ import junit.framework.TestCase;
 // Again, it is up to you to use this file or not!
 
 
-
-
-
 public class UrlValidatorTest extends TestCase {
    private UrlValidator validator = new UrlValidator(UrlValidator.ALLOW_ALL_SCHEMES);
    private PartitionTester partitionTester = new PartitionTester();
@@ -28,7 +25,6 @@ public class UrlValidatorTest extends TestCase {
    Boolean validation;
    String passOrFail = "";
    
-   System.out.println("\n############### BEGIN MANUAL TEST ###############");
    UrlShouldBeValid = true;
    valueReturned = urlVal.isValid("http://www.ebay.com");
    validation= valueReturned == UrlShouldBeValid;
@@ -101,10 +97,8 @@ public class UrlValidatorTest extends TestCase {
    //Check the return value to what should be
    passOrFail = (validation == true) ? "Pass" : "Fail";
    System.out.println("Test result 10: " + passOrFail + " - Value Returned: " + valueReturned + " - Value Expected: " + UrlShouldBeValid);
-   System.out.println("############### END MANUAL TEST ###############");
-   System.out.println("\n"); 
+  }
    
-  }  
    public void testSchemePartition(){
 	  TestPair next;
       next = partitionTester.getNextSchemePartition();
@@ -246,6 +240,10 @@ public class UrlValidatorTest extends TestCase {
    
    public static void main(String[] argv){
       UrlValidatorTest urlTester = new UrlValidatorTest("Final Project Test");
+      System.out.println("\n############### BEGIN MANUAL TEST ###############");
+      urlTester.testManualTest();
+      System.out.println("############### END MANUAL TEST ###############");
+      
       System.out.println("\n############### BEGIN PARTITION TEST ###############");
       urlTester.testSchemePartition();
       urlTester.testAuthorityPartition();
